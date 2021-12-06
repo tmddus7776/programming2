@@ -26,6 +26,7 @@
 * __구조체 및 함수 선언__
 > 구조체: 교수님 성함, 과목명, 학점, 평점을 입력받음
 > 함수: 메뉴 불러오기(menu), 문자열을 입력받아 넘겨주는 함수(scan_data), 노드의 데이터 출력(pringAll), 노드에 데이터 입력(add), 노드검색(search), 노드삭제(del), 파일의 데이터 불러오기(loadfile), 파일에 데이터 업데이트하기(Exit)
+
 > ![구조체 및 함수선언](https://user-images.githubusercontent.com/92290087/144911023-cd4dd71e-32e2-4632-b2b4-e373a65d6d0d.PNG)
 
 
@@ -33,12 +34,14 @@
 > 1. head노드를 생성하고, 파일에서 데이터를 불러와 노드에 저장한다. 
 > 1. 메뉴를 불러오면서 시스템을 실행한다.
 > 1. 나가기를 선택하면, 노드에 저장된 정보를 파일에 업로드하고 메모리를 해제하며 시스템이 종료한다.
+
 > ![메인함수](https://user-images.githubusercontent.com/92290087/144912915-f408d362-13c9-4013-8630-f4f84d42fc08.PNG)
 
 
 
-* __데이터 출력 함수 (void del(Class* hp))__
+* __데이터 출력 함수 (void printAll(Class* hp))__
 > 연결리스트로 연결된 노드의 데이터를 담당 교수님, 과목명, 학점, 평점로 나눠 출력한다.
+
 > ![출력함수](https://user-images.githubusercontent.com/92290087/144916000-54740e55-3cd0-4422-a119-ce05aa572ef4.PNG)
 
 
@@ -46,6 +49,7 @@
 * __데이터 추가 함수 (void add(Class* hp, char**(**fp)(void)))__
 > 1. 문자열을 입력받을 함수를 호출하고, 입력값을 저장할 노드를 생성한다.  
 > 1. 사용자에게 입력값을 받아 노드에 저장하고 head노드 뒤에 연결한다.
+
 > ![노드 추가함수](https://user-images.githubusercontent.com/92290087/144913516-a30de3d8-a7af-4170-b8c0-5cec3433f232.PNG)
 
 
