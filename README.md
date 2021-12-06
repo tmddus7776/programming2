@@ -25,7 +25,8 @@
 
 * __구조체 및 함수 선언__
 > 구조체: 교수님 성함, 과목명, 학점, 평점을 입력받음
-> 함수: 메뉴 불러오기(menu), 문자열을 입력받아 넘겨주는 함수(scan_data), 노드의 데이터 출력(pringAll), 노드에 데이터 입력(add), 노드검색(search), 노드삭제(del), 파일의 데이터 불러오기(loadfile), 파일에 데이터 업데이트하기(Exit)
+
+> 함수: 메뉴 불러오기(menu), 문자열을 입력받아 넘겨주는 함수(scan_data), 노드의 데이터 출력(printAll), 노드에 데이터 입력(add), 노드검색(search), 노드삭제(del), 파일의 데이터 불러오기(loadfile), 파일에 데이터 업데이트하기(Exit)
 
 > ![구조체 및 함수선언](https://user-images.githubusercontent.com/92290087/144911023-cd4dd71e-32e2-4632-b2b4-e373a65d6d0d.PNG)
 
