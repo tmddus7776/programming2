@@ -10,10 +10,16 @@ typedef struct Class {
     struct Class* next;
 }Class;
 
+char data[100];
+char* scan_data(void) {
+    scanf("%s", data);
+    return data;
+}
+
 //사용되는 함수
 void menu();
 void printAll(Class* hp);
-void add(Class* hp);
+void add(Class* hp, char*(*fp) (void));
 void search(Class* hp);
 void del(Class* hp);
 void loadfile(Class* hp);
@@ -40,7 +46,7 @@ void main()
             printAll(head);
             break;
         case 2:
-            add(head);
+            add(head, scan_data);
             break;
         case 3:
             search(head);
@@ -95,7 +101,8 @@ void printAll(Class* hp) {
 }
 
 //데이터 추가
-void add(Class* hp) {
+void add(Class* hp, char*(*fp) (void)) {
+    char* info;
     Class* temp = (Class*)malloc(sizeof(Class));
     Class* last;
     last = hp;
@@ -106,11 +113,11 @@ void add(Class* hp) {
     char inputsubject[200];
     printf("--------------------추가--------------------\n");
     printf("교수님 성함: ");
-    scanf("%s", inputname);
-    strcpy(temp->name, inputname);
+    info = scan_data();
+    strcpy(temp->name, info);
     printf("과목명: ");
-    scanf("%s", inputsubject);
-    strcpy(temp->subject, inputsubject);
+    info = scan_data();
+    strcpy(temp->subject, info);
     printf("학점: ");
     scanf("%d", &temp->size);
     printf("평점: ");
@@ -324,4 +331,5 @@ void Exit(Class* hp)
     fclose(fp);
     return;
 }
+
 
