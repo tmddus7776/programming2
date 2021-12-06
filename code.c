@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+//구조체 선언
 typedef struct Class {
     char name[100];
     char subject[200];
@@ -17,28 +18,28 @@ char* scan_data(void) {
 }
 
 //사용되는 함수
-void menu();
-void printAll(Class* hp);
-void add(Class* hp, char*(*fp) (void));
-void search(Class* hp);
-void del(Class* hp);
-void loadfile(Class* hp);
-void Exit(Class* hp);
-
+void menu(); //메뉴를 출력해주는 함수
+char* scan_data(void); // 문자열을 입력값으로 받아 리턴해주는 함수
+void printAll(Class* hp); // 노드에 연결된 정보를 출력해주는 함수
+void add(Class* hp, char*(*fp) (void)); // 노드에 정보를 추가해주는 함수
+void search(Class* hp); // 노드로 검색하는 함수
+void del(Class* hp); // 노드를 삭제하는 함수
+void loadfile(Class* hp); // 파일에서 데이터를 노드에 저장해주는 함수
+void Exit(Class* hp); // 노드의 데이터를 파일에 저장해주는 함수
 
 void main()
 {
-    Class* head = (Class*)malloc(sizeof(Class));
-    head->next = NULL;
-    int num;
-    //파일의 정보 노드에 연결
-    loadfile(head);
+    Class* head = (Class*)malloc(sizeof(Class)); // head노드 생성
+    head->next = NULL; // 노드 초기화
+    int num; //메뉴에서 선택한 값 저장
+    
+    loadfile(head); // 파일의 정보 노드에 입력
 
-    while (1) {
+    while (1) { // 실행
         menu();
         scanf("%d", &num);
-        if (num == 5) {
-            Exit(head);
+        if (num == 5) { // 나가면서 파일에 데이터 저장
+            Exit(head); 
             break;
         }
         switch (num) {
@@ -63,7 +64,6 @@ void main()
     //메모리해제
     Class* node = head;
     Class* del;
-
     while (node != NULL) {
         del = node;
         node = node->next;
@@ -102,18 +102,16 @@ void printAll(Class* hp) {
 
 //데이터 추가
 void add(Class* hp, char*(*fp) (void)) {
-    char* info;
-    Class* temp = (Class*)malloc(sizeof(Class));
+    char* info; // 문자열을 입력받는 함수를 호출한다.
+    Class* temp = (Class*)malloc(sizeof(Class)); // 입력받은 값을 저장할 노드를 생성한다.
     Class* last;
     last = hp;
     while (last->next != NULL) {
         last = last->next;
     }
-    char inputname[100];
-    char inputsubject[200];
     printf("--------------------추가--------------------\n");
     printf("교수님 성함: ");
-    info = scan_data();
+    info = scan_data(); // 문자열을 입력받을때, 호출한 함수를 이용하여 노드의 값으로 넘긴다.
     strcpy(temp->name, info);
     printf("과목명: ");
     info = scan_data();
@@ -129,7 +127,7 @@ void add(Class* hp, char*(*fp) (void)) {
 
 //데이터 검색
 void search(Class* hp) {
-    int sucess = 0;
+    int success = 0;
     int select;
     int searchsize;
     char searchname[50];
@@ -153,7 +151,7 @@ void search(Class* hp) {
         strcpy(search->name, searchname);
         while (temp != NULL) {
             if (!strcmp(temp->name, search->name)) {
-                sucess = 1;
+                success = 1;
                 printf("--------------------------------------------\n");
                 printf("성함\t과목명\t\t학점\t평점\n");
                 printf("%s\t", temp->name);
@@ -165,7 +163,7 @@ void search(Class* hp) {
             }
             temp = temp->next;
         }
-        if (sucess == 0) {
+        if (success == 0) {
             printf("--------------------------------------------\n");
             printf("검색된 교수님은 존재하지 않습니다.\n");
             printf("--------------------------------------------\n");
@@ -178,8 +176,7 @@ void search(Class* hp) {
         strcpy(search->subject, searchsubject);
         while (temp != NULL) {
             if (!strcmp(temp->subject, search->subject)) {
-                //if (temp->subject == search->subject) {
-                sucess = 1;
+                success = 1;
                 printf("--------------------------------------------\n");
                 printf("성함\t과목명\t\t학점\t평점\n");
                 printf("%s\t", temp->name);
@@ -190,7 +187,7 @@ void search(Class* hp) {
             }
             temp = temp->next;
         }
-        if (sucess == 0) {
+        if (success == 0) {
             printf("--------------------------------------------\n");
             printf("검색된 과목명은 존재하지 않습니다.\n");
             printf("--------------------------------------------\n");
@@ -202,7 +199,7 @@ void search(Class* hp) {
         scanf("%d", &searchsize);
         while (temp != NULL) {
             if (temp->size == searchsize) {
-                sucess = 1;
+                success = 1;
                 printf("--------------------------------------------\n");
                 printf("성함\t과목명\t\t학점\t평점\n");
                 printf("%s\t", temp->name);
@@ -213,7 +210,7 @@ void search(Class* hp) {
             }
             temp = temp->next;
         }
-        if (sucess == 0) {
+        if (success == 0) {
             printf("--------------------------------------------\n");
             printf("검색된 학점은 존재하지 않습니다.\n");
             printf("--------------------------------------------\n");
@@ -324,12 +321,14 @@ void Exit(Class* hp)
             fputs(temp->name, fp); fputs(" ", fp);
             fputs(temp->subject, fp); fputs(" ", fp);
             fprintf(fp, "%d", temp->size); fputs(" ", fp);
-            fprintf(fp, "%f", temp->score); fputs(" ", fp);
+            fprintf(fp, "%f", temp->score); fputs("\n", fp);
             temp = temp->next;
         }
     }
     fclose(fp);
     return;
 }
+
+
 
 
